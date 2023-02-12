@@ -1,0 +1,140 @@
+-- custo script
+
+if game.PlaceId == 9498006165 then
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Tapper Simulator Gui", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+-- Values
+_G.AutoTap = true
+_G.AutoRebirth = true
+_G.JungleEgg = true
+
+
+-- Functions
+
+function AutoTap()
+    while _G.AutoTap == true do
+       game:GetService("ReplicatedStorage").Events.Tap:FireServer("Main")
+       wait(.000000000000000000000000000001)
+     end
+    end
+
+function AutoRebirth()
+    while _G.AutoRebirth == true do
+        game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(1)
+        wait (1)
+     end
+    end
+ 
+
+function JungleEgg()
+    while _G.JungleEgg == true do
+        game:GetService("ReplicatedStorage").Events.HatchEgg:InvokeServer({},"Jungle Egg",1)
+        wait (1)
+     end
+    end 
+            
+
+-- Tabs
+
+
+local Tab1 = Window:MakeTab({
+	Name = "AutoFarm",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Tab2 = Window:MakeTab({
+	Name = "OpenEggs",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Tab3 = Window:MakeTab({
+	Name = "Teleport",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Tab4 = Window:MakeTab({
+	Name = "Misc",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+-- Toggles
+
+Tab1:AddToggle({
+	Name = "AutoTap",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoTap = Value
+		AutoTap()
+	end
+})
+
+Tab1:AddToggle({
+	Name = "AutoRebirth",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoRebirth = Value
+        AutoRebirth()
+	end
+})
+
+Tab2:AddToggle({
+	Name = "Open Jungle Egg",
+	Default = false,
+	Callback = function(Value)
+		_G.JungleEgg = Value
+        JungleEgg()
+	end
+})
+
+
+-- Buttons
+
+Tab3:AddButton({
+	Name = "Forest Island",
+	Callback = function()
+        game:GetService("ReplicatedStorage").Events.Teleport:FireServer(CFrame.new(-163.984467, 987.596497, -403.339417, 1, 0, 0, 0, 1, 0, 0, 0, 1))
+  	end    
+})
+
+Tab3:AddButton({
+	Name = "Flower Island",
+	Callback = function()
+        game:GetService("ReplicatedStorage").Events.Teleport:FireServer(CFrame.new(-179.51564, 1524.63098, -682.498718, -1, 0, -0, -0, 1, -0, -0, 0, -1))
+  	end    
+})
+
+Tab3:AddButton({
+	Name = "Swamp Island",
+	Callback = function()
+       game:GetService("ReplicatedStorage").Events.Teleport:FireServer(CFrame.new(-264.358887, 2123.06299, -694.661316, -1, 0, -0, -0, 1, -0, -0, 0, -1))
+  	end    
+})
+
+Tab4:AddButton({
+	Name = "Speed",
+	Callback = function()
+     -- Get the player's character
+    local character = game.Players.LocalPlayer.Character
+
+    -- Get the GUI button that the player will click
+     local button = script.Parent
+
+     -- Event handler for the button click
+    button.MouseButton1Click:Connect(function()
+     -- Change the speed of the player's character to 60 units
+    character.Humanoid.WalkSpeed = 300
+ end)
+
+
+  	end    
+})
+
+
+
+end
+OrionLib:Init()
